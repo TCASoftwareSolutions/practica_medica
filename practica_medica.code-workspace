@@ -1,0 +1,36 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"ms-python.vscode-pylance",
+			"ms-python.python",
+			"ms-python.debugpy",
+			"ms-python.vscode-python-envs",
+			"njpwerner.autodocstring",
+			"ms-python.flake8",
+		]
+	},
+	"settings": {
+		"python-envs.pythonProjects": [],
+		"explorer.compactFolders": false,
+		"scm.compactFolders": false,
+		"pylint.args": [
+			"--max-line-length=256",
+			"--max-module-lines=2000",
+			"--class-naming-style=PascalCase",
+			"--function-naming-style=snake_case",
+			"--method-naming-style=snake_case",
+			"--attr-naming-style=snake_case",
+			"--disable=raise-missing-from",
+			"--disable=broad-exception-raised",
+			"--disable=broad-exception-caught",
+			"--method-rgx=(?:(?P<snake>[a-z_]+)|(?P<custom>on[A-Za-z]+_[A-Za-z0-9_]+))",
+			"--disable=missing-function-docstring",
+			"--disable=no-member"
+		],
+	}
+}

@@ -1,0 +1,118 @@
+[project]
+name = "practica_medica-automation-testing"
+version = "0.1.0"
+description = "Automation testing"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "selenium==4.34.0",
+    "webdriver-manager==4.0.2",
+    "pytest==8.4.1",
+    "pytest-cov==6.2.1",
+    "pytest-html==4.1.1",
+    "pytest-xdist==3.8.0",
+    "pytest-nunit==1.0.7",
+    "pytest-azurepipelines==1.0.5",
+    "pytest-repeat==0.9.4",
+    "azure-devops==7.1.0b4",
+    "PyYAML==6.0.2",
+    "Faker==37.4.0",
+    "python-dateutil==2.9.0.post0",
+    "Flake8-pyproject==1.2.3",
+    "pre_commit==4.2.0",
+    "fastapi==0.115.14",
+    "uvicorn==0.35.0",
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--strict-markers --tb=short --no-cov --cov-report=xml"
+testpaths = [
+    "src/tests"
+]
+markers = [
+    "smoke: Pruebas rápidas para verificar funcionalidades críticas.",
+	"regression: Pruebas de regresión para asegurar que no hay fallos en funciones existentes.",
+    "e2e: Pruebas de extremo a extremo",
+    "load: Pruebas de carga",
+    "performance: Pruebas de rendimiento",
+
+	"slow: Pruebas que pueden tardar más tiempo en ejecutarse.",
+    "azure_sync: Pruebas de sincronización con Azure.",
+    "test_plan_id: Marca para identificar el ID de un plan de pruebas.",
+    "test_suite_id: Marca para identificar el ID de una suite de pruebas.",
+    "test_name: Marca para identificar el nombre de un caso de prueba.",
+    "test_case_id: Marca para identificar el ID de un caso de prueba.",
+    "test: Pruebas generales.",
+    "auth: Pruebas de autenticacion",
+
+    "mp_hos930: pruebas del programa mp_hos930",
+    "pm_callcenter: pruebas del programa pm_callcenter",
+    "mp_jefedeturno: pruebas del programa del supervisor",
+    "mp_informesolicitudes: pruebas del programa de informes de solicitudes",
+    "mp_tableromedico: pruebas del programa tablero medico",
+]
+junit_suite_name = "TestSuite"
+junit_family = "xunit2"
+
+[tool.flake8]
+max-line-length = 256
+ignore = [
+    "E203",
+    "E266",
+    "W503",
+    "F403",
+    "F841",
+    "E722"
+]
+exclude = [
+    ".git",
+    "__pycache__",
+    ".venv",
+    "venv",
+    "reports",
+    "build",
+    "docs",
+    "htmlcov",
+    "migrations"
+]
+filename = "*.py"
+statistics = true
+
+[tool.bandit]
+exclude_dirs = [
+    ".git",
+    ".venv",
+    ".vscode",
+    "__pycache__",
+    ".venv",
+    "venv",
+    "reports",
+    "build",
+    "docs",
+    "htmlcov",
+    "migrations"
+]
+tests = ["B201", "B301"]
+skips = ["B101", "B107", "B311", "B601"]
+
+[tool.black]
+line-length = 256
+target-version = ["py313"]
+include = '\.pyi?$'
+exclude = '''
+(
+    /(
+        \.git
+        |\.venv
+        |\.vscode
+        |__pycache__
+        |venv
+        |reports
+        |build
+        |docs
+        |htmlcov
+        |migrations
+    )/
+)
+'''

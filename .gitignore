@@ -1,0 +1,72 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.swp
+*.swo
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Logs
+*.log
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+.ENV/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# VS Code
+.vscode/
+.history/
+
+# Pytest
+.cache/
+.pytest_cache/
+
+# Coverage reports
+reports/coverage/
+htmlcov/
+coverage.*
+.coverage
+.coverage.*
+
+# Selenium
+selenium-screenshots/
+
+# Config files
+src/config/environments.yaml
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Reports
+reports/html/
+reports/logs/
+reports/screenshots/
+reports/xml/
+test-output.xml
+
+# Drivers
+src/drivers/*.exe
+src/drivers/*.zip
+src/drivers/downloads/*
+
+# Miscellaneous
+initilizer.ps1
+remove_pycache.ps1
+
+# Selenium JAR files
+selenium-server-*.jar
+
+# Test output files
+test-output.xml

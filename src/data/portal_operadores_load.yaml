@@ -1,0 +1,18 @@
+default:
+  codigo_OTP: '277478'
+  user_pool:
+    size: 50  # Número de usuarios concurrentes
+    dui_format: "########-#"  # Formato: 8 dígitos, guion, 1 dígito
+    email_domain: "@loadtest.com"
+    phone:
+      lada: "+503"  # Lada de El Salvador
+      prefix: "76152700"  # Prefijo de teléfono móvil
+  test_scenarios:
+    registro:
+      fecha_de_nacimiento: 30/11/1983
+      genero: Femenino
+      tipo_de_documento: DUI
+    gestion_de_citas:
+      canal_de_atencion: Videollamada
+      fecha_de_cita_medica: 20/06/2025
+      hora_de_inicio_cita_medica: 10:00 AM

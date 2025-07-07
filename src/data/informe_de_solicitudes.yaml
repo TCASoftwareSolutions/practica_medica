@@ -1,0 +1,5 @@
+default:
+  codigo_OTP: "277478"
+  read:
+    dui:
+      clave_de_documento: "06318597-4"

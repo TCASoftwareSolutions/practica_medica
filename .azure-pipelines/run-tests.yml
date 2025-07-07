@@ -1,0 +1,22 @@
+parameters:
+  - name: mark
+    type: string
+
+steps:
+  - script: |
+      pytest -m ${{ parameters.mark }} --test-run-title="Test ${{ parameters.mark }}"
+    displayName: 'Ejecuta pruebas'
+  
+  - task: PublishTestResults@2
+    condition: succeededOrFailed()
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/$(reportsJunitXMLPath)/$(currentDate)/*.xml'
+    displayName: 'Publica resultados de pruebas en Azure DevOps Formato JUnit'
+
+  - task: PublishPipelineArtifact@1
+    condition: succeededOrFailed()
+    inputs:
+      targetPath: 'reports'
+      artifact: 'TestReports'
+    displayName: 'Publica artefactos del reporte'

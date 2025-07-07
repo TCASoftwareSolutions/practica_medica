@@ -1,0 +1,48 @@
+# Configuración del pipeline en Azure DevOps para ejecutar pruebas por cada @pytest.mark
+trigger:
+  branches:
+    include:
+      - main  # Configura la rama que dispara el pipeline
+
+variables:
+  pythonVersion: '3.13'  # Define la versión de Python
+  currentDate: $[ format('{0:yyyy}-{0:MM}-{0:dd}', pipeline.startTime) ] # Define la fecha actual
+  timestamp: $[ format('{0:yyyy}-{0:MM}-{0:dd} {0:HH}.{0:mm}.{0:ss}', pipeline.startTime) ]  # Define la marca de tiempo
+  reportsHTMLPath: 'reports/html'
+  reportsJunitXMLPath: 'reports/xml/junit'
+  reportsNunitXMLPath: 'reports/xml/nunit'
+
+stages:
+  - stage: BuildAndTest
+    jobs:
+      - job: InstallAndTest
+        pool:
+          vmImage: 'windows-latest'
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '$(pythonVersion)'
+              addToPath: true
+
+          - task: Cache@2
+            inputs:
+              key: 'pip | "$(Agent.OS)" | pyproject.toml'
+              restoreKeys: |
+                pip | "$(Agent.OS)"
+              path: $(Pipeline.Workspace)/.pip-cache
+            displayName: 'Cache de dependencias de pip'
+
+          - script: |
+              python -m pip install --upgrade pip
+              pip install . --cache-dir $(Pipeline.Workspace)/.pip-cache
+            displayName: 'Instala dependencias'
+          
+          - task: ScreenResolutionUtility@1
+            inputs:
+              displaySettings: 'specific'
+              width: '1920'
+              height: '1080'
+        
+          - template: .azure-pipelines/run-tests.yml
+            parameters: 
+                mark: '$(TEST_MARK)'

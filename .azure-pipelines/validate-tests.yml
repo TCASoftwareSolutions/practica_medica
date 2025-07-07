@@ -1,0 +1,14 @@
+parameters:
+  - name: mark
+    type: string
+
+steps:
+  - script: |
+      pip install Flake8-pyproject black safety bandit
+      flake8 src
+      black --check src
+      safety check --full-report
+      bandit -r src
+      pytest -m ${{ parameters.mark }} --test-run-title="Test -${{ parameters.mark }}" --nunit-xml=$(reportsNunitXMLPath)-${{ parameters.mark }}.xml 
+    displayName: 'Ejecuta validaciones y pruebas'
+

@@ -1,0 +1,14 @@
+default:
+  duis:
+    - numero: "04759527-4"
+      fecha_de_nacimiento: "07/02/1993"
+      genero: "Femenino"
+    - numero: "04201110-2"
+      fecha_de_nacimiento: "20/12/1989"
+      genero: "Masculino"
+    - numero: "03563619-5"
+      fecha_de_nacimiento: "13/06/1986"
+      genero: "Masculino"
+    - numero: "05234122-4"
+      fecha_de_nacimiento: "09/09/1995"
+      genero: "Femenino"
