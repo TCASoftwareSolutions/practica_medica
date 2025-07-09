@@ -59,22 +59,24 @@ class TestTableroMedico:
                 pytest.skip("No hay citas programadas para el médico.")
         time.sleep(5)  # Esperar a que se abra el formulario de cita
 
+        diagnostico = "Pasteurelosis"
         workflow_tablero = TableroMedicoWorkflow(ui_adapter, test_config)
         tablero_medico = workflow_tablero.execute()
         tablero_medico.onClick_Nota_Medica()
         tablero_medico.set_consultar_por("data")
         tablero_medico.set_triage("1")
-        tablero_medico.setup_signos_vitales({"temperatura": "36.5", "frecuencia_cardiaca": "72", "frecuencia_respiratoria": "16", "presion_arterial": "120/80", "saturacion_oxigeno": "98", "peso": "70", "talla": "1.75"})
+        tablero_medico.setup_signos_vitales({"temperatura": "36.5", "frecuencia_cardiaca": "72", "frecuencia_respiratoria": "16", "presion_arterial": "120/80", "saturacion": "98", "peso": "70", "talla": "1.75"})
         tablero_medico.set_presente_enfermedad("Diabetes")
         tablero_medico.set_apreciacion_diagnostica("Paciente estable, continuar con el tratamiento actual.")
 
-        tablero_medico.set_diag_principal("Diabetes mellitus tipo 2")
-
+        tablero_medico.set_gridview_diagnostico_principal(diagnostico)
+        # tablero_medico.close_gridview()
         tablero_medico.onClick_generar_diagnostico_principal()
+        tablero_medico.onClick_Agregar_problema_activo(f"Se tienen antecedentes familiares de {diagnostico}")
 
-        tablero_medico.onClick_Agregar_problema_activo()
-        tablero_medico.set_diagnostico_secundario("Hipertensión")
+        tablero_medico.set_gridview_diagnostico_secundario(diagnostico)
         tablero_medico.onClick_Agregar_diagnostico_secundario()
-        tablero_medico.onClick_Finalizar_cita()
+        tablero_medico.set_plan_tratamiento("Seguir con el plan actual")
 
+        tablero_medico.onClick_Finalizar_cita()
         workflow.terminate()
