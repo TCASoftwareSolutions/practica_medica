@@ -85,7 +85,6 @@ class DataGridViewHelper:
             time.sleep(2)
             datagridview = self.ui_adapter.find_elements(self.grid)
             for cell in datagridview:
-                self.logger.info(f"Texto de la celda: {cell.text} - Filtro: {filtro}")
                 if filtro in cell.text:
                     cell.click()
                     break
@@ -101,10 +100,9 @@ class DataGridViewHelper:
             datagridview = self.ui_adapter.find_elements(self.grid)
             for cell in datagridview:
                 if filtro in cell.text:
-                    cell.click()
+                    # cell.click()
+                    self.ui_adapter.click(self.colSeleccionada)
                     break
-            self.ui_adapter.click(self.colSeleccionada)
-            self.ui_adapter.click(self.btnSeleccionar)
             time.sleep(2)
         except Exception as e:
             self.logger.error(f"Error al seleccionar el elemento: {e}")
