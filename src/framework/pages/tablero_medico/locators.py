@@ -22,8 +22,10 @@ class TableroMedicoLocators:
     # toolbar
     tipMoverAEspera = (By.XPATH, "//div[contains(@id,'MP_TableroMedico_mpTabMedTCAToolBarDesigner1_wrapper')]/descendant::div[contains(@id,'mpTabMedTCAToolBarDesigner1ID_F4')]")
     tipAbrirLlamada = (By.XPATH, "//div[contains(@id,'MP_TableroMedico_mpTabMedTCAToolBarDesigner1_wrapper')]/descendant::div[contains(@id,'mpTabMedTCAToolBarDesigner1ID_F2')]")
-    tipFinalizarCita = (By.XPATH, "//div[contains(@id,'MP_TableroMedico_mpTabMedTCAToolBarDesigner1_wrapper')]/descendant::div[contains(@id,'mpTabMedTCAToolBarDesigner1ID_F1')]")
+    tipFinalizarCita = (By.XPATH, "//div[contains(@id,'MP_TableroMedico_mpTabMedTCAToolBarDesigner1_wrapper')]/descendant::i[contains(@class,'icon icon-ok')]/ancestor::div[contains(@class,'tktoolbar-item')]")
     tipSalir = (By.XPATH, "//div[contains(@id,'MP_TableroMedico_mpTabMedTCAToolBarDesigner1_wrapper')]/descendant::div[contains(@id,'mpTabMedTCAToolBarDesigner1ID_F99')]")
+    loadingBarOn = (By.XPATH, "//div[@class='line-loader']")
+    notificationsDiv = (By.XPATH, "//div[contains(@class, 'alertify-notifier')]/descendant::div")
 
     tabLineaDeTiempo = (By.XPATH, "//div[contains(@id,'MP_TableroMedico_ctl00_KendoListSelectTabMedTemplate_wrapper')]/descendant::button[contains(@id,'btnIdMenuLate0MP_TableroMedico')]")
     tabListaDeProblemas = (By.XPATH, "//div[contains(@id,'MP_TableroMedico_ctl00_KendoListSelectTabMedTemplate_wrapper')]/descendant::button[contains(@id,'btnIdMenuLate2MP_TableroMedico')]")
@@ -774,6 +776,7 @@ class TableroMedicoLocators:
     btnAgregarProblemaSecundario = (By.XPATH, "//div[contains(@id,'MPTableroMedico_panelNotaMed6_mp_nm_btnAgregarDco_wrapper')]/descendant::button[contains(@id,'MPTableroMedico_panelNotaMed6_mp_nm_btnAgregarDco')]")
 
     # Información del paciente - Nota Medica - Tratamiento
+    txtPlanTratamiento = (By.XPATH, "//div[contains(@id,'MPTableroMedico_panelNotaMed7_mp_nm_txtPlanTrat_wrapper')]/descendant::textarea[contains(@id,'MPTableroMedico_panelNotaMed7_mp_nm_txtPlanTrat')]")
     btnMostrarPlan = (By.XPATH, "//div[contains(@id,'MPTableroMedico_panelNotaMed7_mp_nm_btnMostrarPlan_wrapper')]/descendant::button[contains(@id,'MPTableroMedico_panelNotaMed7_mp_nm_btnMostrarPlan')]")
 
     # Información del paciente - Estudios complementarios
@@ -808,3 +811,19 @@ class TableroMedicoLocators:
 
     # Información del paciente - Signos Vitales
     btnRefrescarSignosVitales = (By.XPATH, "//div[contains(@id,'MPTableroMedico_panelSignosVitales1_btnActualizarGridSV_wrapper')]/descendant::button[contains(@id,'MPTableroMedico_panelSignosVitales1_btnActualizarGridSV')]")
+
+    # Confirmacion Agregar problema
+    btnSi = (By.XPATH, "//button[normalize-space()='Si']")
+    btnNo = (By.XPATH, "//button[normalize-space()='No']")
+    txtAltaComentario = (By.XPATH, "//div[contains(@id,'mpTabMed_txtAltaComentario_wrapper')]/descendant::textarea[contains(@id,'mpTabMed_txtAltaComentario')]")
+    tbnGuardarComentario = (By.XPATH, "//button[contains(@id, 'mp_nm_btnAltaPro')]//span[@class='tkbuttontext'][normalize-space()='Guardar']")
+
+    # pop up Programa de seguimiento
+    btnFinCita = (By.XPATH, "(//button[@class='ajs-button ajs-ok'][normalize-space()='Si'])[2]")
+    chk24 = (By.XPATH, "//input[contains(@id, 'NotaMedicaMP_mp_segop_ck24horas')]")
+    chk48 = (By.XPATH, "//input[contains(@id, 'NotaMedicaMP_mp_segop_ck48horas')]")
+    chk72 = (By.XPATH, "//input[contains(@id, 'NotaMedicaMP_mp_segop_ck72horas')]")
+    chkNo = (By.XPATH, "//input[contains(@id, 'NotaMedicaMP_mp_segop_ckcronico')]")
+    IniPausa = (By.XPATH, "//input[contains(@id, 'v10NotaMedicaMP_Tcacheckbox1')]")
+    btnContinuar = (By.XPATH, "//button[contains(@id, 'v10NotaMedicaMP_mp_segop_btnContinuar')]")
+    btnSalir = (By.XPATH, "//input[contains(@id, 'v10NotaMedicaMP_mp_segop_Salir')]")

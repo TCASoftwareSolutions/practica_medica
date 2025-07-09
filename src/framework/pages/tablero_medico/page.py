@@ -61,12 +61,22 @@ class TableroMedicoPage:
             Exception: Error al hacer click en finalizar cita
         """
         try:
+            self.ui_adapter.wait_manager.wait_for_element_absent(*self.locators.notificationsDiv)
             self.logger.info("Haciendo click en el botón Finalizar Cita")
             self.ui_adapter.take_screenshot(self.test_config.screenshot_dir, "Haciendo click en el botón Finalizar Cita")
             self.ui_adapter.wait_manager.wait_for_element_clickable(*self.locators.tipFinalizarCita)
             self.ui_adapter.click(self.locators.tipFinalizarCita)
             self.logger.info("Se hizo click en el botón Finalizar Cita")
             self.ui_adapter.take_screenshot(self.test_config.screenshot_dir, "Se hizo click en el botón Finalizar Cita")
+
+            self.ui_adapter.wait_manager.wait_for_element_clickable(*self.locators.btnFinCita)
+            self.ui_adapter.click(self.locators.btnFinCita)
+            self.ui_adapter.wait_manager.wait_for_element_clickable(*self.locators.chkNo)
+            self.ui_adapter.click(self.locators.chkNo)
+            self.ui_adapter.wait_manager.wait_for_element_clickable(*self.locators.btnContinuar)
+            self.ui_adapter.click(self.locators.btnContinuar)
+            self.ui_adapter.wait_manager.wait_for_element_absent(*self.locators.loadingBarOn)
+
         except Exception as e:
             self.logger.error(f"Error al hacer click en Finalizar Cita: {e}")
             raise Exception(f"Error al hacer click en Finalizar Cita: {e}")
@@ -141,6 +151,7 @@ class TableroMedicoPage:
             Exception: Error al hacer click en la nota medica
         """
         try:
+            self.ui_adapter.wait_manager.wait_for_element_absent(*self.locators.loadingBarOn)
             self.logger.info("Haciendo click en la nota médica")
             self.ui_adapter.take_screenshot(self.test_config.screenshot_dir, "Haciendo click en la nota médica")
             self.ui_adapter.wait_manager.wait_for_element_clickable(*self.locators.tabNotaMedica)
@@ -726,11 +737,13 @@ class TableroMedicoPage:
             self.ui_adapter.click(self.locators.btnGenerarDiagnosticoPrincipal)
             self.logger.info("Se hizo click en Generar Diagnóstico Principal")
             self.ui_adapter.take_screenshot(self.test_config.screenshot_dir, "Se hizo click en Generar Diagnóstico Principal")
+            time.sleep(5)
+            self.ui_adapter.wait_manager.wait_for_element_absent(*self.locators.loadingBarOn)
         except Exception as e:
             self.logger.error(f"Error al hacer click en Generar Diagnóstico Principal: {e}")
             raise Exception(f"Error al hacer click en Generar Diagnóstico Principal: {e}")
 
-    def onClick_Agregar_problema_activo(self):
+    def onClick_Agregar_problema_activo(self, comentario_alta):
         """Hacer click en Agregar a Problemas Activos
         Raises:
             Exception: Error al hacer click en agregar diagnostico principal
@@ -739,9 +752,20 @@ class TableroMedicoPage:
             self.logger.info("Haciendo click en Agregar a Problemas Activos")
             self.ui_adapter.take_screenshot(self.test_config.screenshot_dir, "Haciendo click en Agregar a Problemas Activos")
             self.ui_adapter.wait_manager.wait_for_element_clickable(*self.locators.btnAgregarProblemasActivos)
-            self.ui_adapter.click(self.locators.btnAgregarProblemasActivos)
+            self.ui_adapter.double_click(self.locators.btnAgregarProblemasActivos)
             self.logger.info("Se hizo click en Agregar a Problemas Activos")
+
             self.ui_adapter.take_screenshot(self.test_config.screenshot_dir, "Se hizo click en Agregar a Problemas Activos")
+            self.ui_adapter.wait_manager.wait_for_element_clickable(*self.locators.btnSi)
+            self.ui_adapter.click(self.locators.btnSi)
+
+            self.ui_adapter.wait_manager.wait_for_element_typing(*self.locators.txtAltaComentario)
+            self.ui_adapter.clear(self.locators.txtAltaComentario)
+            self.ui_adapter.send_keys_tab(self.locators.txtAltaComentario, comentario_alta)
+            self.ui_adapter.click(self.locators.txtAltaComentario)
+            self.ui_adapter.wait_manager.wait_for_element_clickable(*self.locators.tbnGuardarComentario)
+            self.ui_adapter.click(self.locators.tbnGuardarComentario)
+
         except Exception as e:
             self.logger.error(f"Error al hacer click en Agregar a Problemas Activos: {e}")
             raise Exception(f"Error al hacer click en Agregar a Problemas Activos: {e}")
@@ -888,3 +912,56 @@ class TableroMedicoPage:
         except Exception as e:
             self.logger.error(f"Error al hacer click en Calificar Paciente: {e}")
             raise Exception(f"Error al hacer click en Calificar Paciente: {e}")
+
+    def set_gridview_diagnostico_principal(self, diagnostico_principal: str):
+        """Para usar el select box que se abre al salir del campo Diagnostico Principal
+        Args:
+            diagnostico_principal (str): Valor a escribir
+        Raises:
+            Exception: Error al configurar el campo Diagnostico Principal
+        """
+        try:
+            diagnostico_principal = diagnostico_principal if diagnostico_principal else self.data.get("diagnostico_principal", "default")
+            self.ui_adapter.wait_manager.wait_for_element_typing(*self.locators.txtDiagnosticoPrincipal)
+            self.ui_adapter.send_keys_enter(self.locators.txtDiagnosticoPrincipal, diagnostico_principal)
+            self.datagrid.selec_data(diagnostico_principal)
+
+        except Exception as e:
+            self.logger.error(f"Error al iteractuar con el grid de Diagnóstico Principal: {e}")
+            raise Exception(f"Error al iteractuar con el grid de Diagnóstico Principal: {e}")
+
+    def set_gridview_diagnostico_secundario(self, diagnostico_secundario: str):
+        """Para usar el select box que se abre al salir del campo Diagnostico Secundario
+        Args:
+            diagnostico_secundario (str): Valor a escribir
+        Raises:
+            Exception: Error al configurar el campo Diagnostico Secundario
+        """
+        try:
+            diagnostico_secundario = diagnostico_secundario if diagnostico_secundario else self.data.get("diagnostico_secundario", "default")
+            self.ui_adapter.wait_manager.wait_for_element_typing(*self.locators.txtDiagnosticoSecundario)
+            self.ui_adapter.send_keys_enter(self.locators.txtDiagnosticoSecundario, diagnostico_secundario)
+            self.datagrid.selec_data(diagnostico_secundario)
+            time.sleep(2)
+
+        except Exception as e:
+            self.logger.error(f"Error al iteractuar con el grid de Diagnóstico Secundario: {e}")
+            raise Exception(f"Error al iteractuar con el grid de Diagnóstico Secundario: {e}")
+
+    def set_plan_tratamiento(self, plan_tratamiento: str):
+        """LLena el campo de plan de tratamiento
+        Args:
+            plan_tratamiento (str): Valor a seleccionar
+        Raises:
+            Exception: Error al seleccionar el plan de tratamiento
+        """
+        try:
+
+            self.ui_adapter.wait_manager.wait_for_element_visible(*self.locators.txtPlanTratamiento)
+            self.ui_adapter.click(self.locators.txtPlanTratamiento)
+            self.ui_adapter.send_keys(self.locators.txtPlanTratamiento, plan_tratamiento)
+            self.logger.info(f"Se configuró el plan de tratamiento: {plan_tratamiento}")
+            self.ui_adapter.take_screenshot(self.test_config.screenshot_dir, f"Se configuró el plan de tratamiento: {plan_tratamiento}")
+        except Exception as e:
+            self.logger.error(f"Error al configurar el campo plan de tratamiento: {e}")
+            raise Exception(f"Error al configurar el campo plan de tratamiento: {e}")
