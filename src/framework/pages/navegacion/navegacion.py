@@ -173,6 +173,7 @@ class NavegacionPage:
         try:
             self.ui_adapter.wait_manager.wait_for_page_load()
             self.logger.info("Verificando si se cargó la página de bienvenida")
+            self.ui_adapter.wait_manager.wait_for_element_exists(*self.locators.app_system_date)
             self.logger.info(f"Fecha del sistema: {self.ui_adapter.get_text(self.locators.app_system_date)}")
             self.logger.info(f"UUID: {self.ui_adapter.get_text(self.locators.app_uuid)}")
             self.ui_adapter.wait_manager.wait_for_element_not_visible(*self.locators.app_loading)
