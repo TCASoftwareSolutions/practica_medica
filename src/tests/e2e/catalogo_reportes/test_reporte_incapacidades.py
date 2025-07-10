@@ -2,15 +2,15 @@ from datetime import datetime
 import pytest
 from adapter.selenium.selenium_adapter import SeleniumAdapter as UIPort
 from framework.utilities.configuration import Configuration
-from framework.pages.catalogo_reportes.reporte_incapacidades.workflow import IncapacidadesWorkflow
+from framework.pages.catalogo_reportes.reporte_incapacidades.workflow import ReporteDeIncapacidadesWorkflow
 
 
 @pytest.mark.e2e
 @pytest.mark.mp_tableromedico
-class TestReporteIncapacidades:
+class TestReporteDeIncapacidades:
     """Conjunto de pruebas para el programa reporte de incapacidades"""
 
-    logger_name = "TestReporteIncapacidades_Logger"
+    logger_name = "TestReporteDeIncapacidades_Logger"
     logger_date = datetime.now().date()
     logger_datetime = datetime.now().strftime("%Y-%m-%d %H.%M.%S")
     logger_dir = f"reporte_incapacidades/reporte_incapacidades{logger_date}/reporte_incapacidades{logger_datetime}"
@@ -40,13 +40,13 @@ class TestReporteIncapacidades:
         record_pipelines_property("test_case_id", test_case_id)
 
     def test01_Open_Reporte_Incapacidades(self, ui_adapter: UIPort, record_pipelines_property):
-        """Prueba de apertura del programa Reporte de incapacidades Medica como médico"""
-        test_name = "Test01_Open_Program_Medico"
+        """Prueba de apertura del programa Reporte de incapacidades como médico"""
+        test_name = "test01_Open_Reporte_Incapacidades"
         self.setup_test(test_name)
         self.record_properties(record_pipelines_property, test_name, "001", "001")
         test_config = Configuration(config=ui_adapter.config, screenshot_dir=self.screenshot_dir, logger_name=self.logger_name, logger_dir=self.logger_dir, test_name=test_name)
 
-        workflow = IncapacidadesWorkflow(ui_adapter, test_config)
+        workflow = ReporteDeIncapacidadesWorkflow(ui_adapter, test_config)
         reporte_incapacidades = workflow.execute()
 
         reporte_incapacidades.onClick_Modificar_Parametros()

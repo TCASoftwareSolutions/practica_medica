@@ -2,12 +2,12 @@ import time
 import pytest
 from adapter.selenium.selenium_adapter import SeleniumAdapter as UIPort
 from framework.utilities.configuration import Configuration
-from framework.pages.catalogo_reportes.reporte_incapacidades.locators import ReporteIncapacidadesLocators as Locators
+from framework.pages.catalogo_reportes.reporte_incapacidades.locators import ReporteDeIncapacidadesLocators as Locators
 from framework.utilities.datagridview_helper import DataGridViewHelper
 from framework.utilities.combobox_helper import ComboBoxHelper
 
 
-class ReporteIncapacidadesPage:
+class ReporteDeIncapacidadesPage:
     """Clase que contiene los metodos de la pagina reporte de incapacidades.
     Esta clase permite interactuar con sus elementos
     """
@@ -84,7 +84,6 @@ class ReporteIncapacidadesPage:
         try:
             self.logger.info("Haciendo click en Actualizar")
             self.ui_adapter.take_screenshot(self.test_config.screenshot_dir, "Haciendo click en Actualizar")
-            time.sleep(3)
             self.ui_adapter.wait_manager.wait_for_element_clickable(*self.locators.btnActualizar)
             self.ui_adapter.click(self.locators.btnActualizar)
             self.ui_adapter.take_screenshot(self.test_config.screenshot_dir, "Se hizo click en Actualizar")

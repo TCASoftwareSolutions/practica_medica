@@ -1,8 +1,8 @@
 from selenium.webdriver.common.by import By
 
 
-class ReporteIncapacidadesLocators:
-    """Clase para almacenar los localizadores del programa de Tablero Médico.
+class ReporteDeIncapacidadesLocators:
+    """Clase para almacenar los localizadores del programa de Reporte de incapacidades.
     Esta clase contiene los selectores necesarios para interactuar con los elementos de la interfaz de usuario
     """
 

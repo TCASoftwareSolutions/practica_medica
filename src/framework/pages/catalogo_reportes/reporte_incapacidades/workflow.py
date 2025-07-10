@@ -1,12 +1,12 @@
 from adapter.selenium.selenium_adapter import SeleniumAdapter as UIPort
 from framework.pages.navegacion.navegacion import NavegacionPage
 from framework.utilities.configuration import Configuration
-from framework.pages.catalogo_reportes.reporte_incapacidades.locators import ReporteIncapacidadesLocators as Locators
-from framework.pages.catalogo_reportes.reporte_incapacidades.page import ReporteIncapacidadesPage
+from framework.pages.catalogo_reportes.reporte_incapacidades.locators import ReporteDeIncapacidadesLocators as Locators
+from framework.pages.catalogo_reportes.reporte_incapacidades.page import ReporteDeIncapacidadesPage
 from framework.pages.login.page import LoginPage
 
 
-class IncapacidadesWorkflow:
+class ReporteDeIncapacidadesWorkflow:
     def __init__(self, ui_adapter: UIPort, test_config: Configuration):
         self.ui_adapter = ui_adapter
         self.test_config = test_config
@@ -14,7 +14,7 @@ class IncapacidadesWorkflow:
         self.logger = test_config.logger
         self.ui_adapter.configure_logger(self.logger)
 
-    def execute(self) -> ReporteIncapacidadesPage:
+    def execute(self) -> ReporteDeIncapacidadesPage:
         """Ejecutar el flujo de Reporte de incapacidades
         Raises:
             Exception: Error al iniciar sesión
@@ -38,7 +38,7 @@ class IncapacidadesWorkflow:
             self.logger.info(f"Reporte de incapacidades tab text: {self.ui_adapter.get_text(self.locators.tab_reporte_incapacidades)}")
 
             self.logger.info("Aplicación Reporte de incapacidades abierta correctamente")
-            return ReporteIncapacidadesPage(self.ui_adapter, self.test_config)
+            return ReporteDeIncapacidadesPage(self.ui_adapter, self.test_config)
 
         except Exception as e:
             self.logger.error(f"Error al iniciar sesión: {str(e)}")
