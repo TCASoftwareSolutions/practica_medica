@@ -85,7 +85,7 @@ class ReporteDeIncapacidadesPage:
             self.logger.info("Haciendo click en Actualizar")
             self.ui_adapter.take_screenshot(self.test_config.screenshot_dir, "Haciendo click en Actualizar")
             self.ui_adapter.wait_manager.wait_for_element_clickable(*self.locators.btnActualizar)
-            self.ui_adapter.click(self.locators.btnActualizar)
+            self.ui_adapter.double_click(self.locators.btnActualizar)
             self.ui_adapter.take_screenshot(self.test_config.screenshot_dir, "Se hizo click en Actualizar")
             self.ui_adapter.wait_manager.wait_for_element_exists(*self.locators.tableRow)
 

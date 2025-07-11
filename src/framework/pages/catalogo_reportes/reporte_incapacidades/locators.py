@@ -20,7 +20,7 @@ class ReporteDeIncapacidadesLocators:
     fchInicail = (By.XPATH, " //span[contains(@class, 'riContentWrapper')]/input[contains(@tabindex, '3')]")
     fchFinal = (By.XPATH, " //span[contains(@class, 'riContentWrapper')]/input[contains(@tabindex, '4')] ")
     Documento = (By.XPATH, " //span[contains(@class, 'riContentWrapper')]/input[contains(@tabindex, '5')] ")
-    btnActualizar = (By.XPATH, "//span[contains(@id, 'repReportPreview594_ReportSplitter_GetReportBtn')]/input[contains(@id, 'repReportPreview594_ReportSplitter_GetReportBtn_input')]")
+    btnActualizar = (By.XPATH, "//span[contains(@id, 'repReportPreview594_ReportSplitter_GetReportBtn')]")
 
     # table
     tableInfo = (By.XPATH, "//span[contains(@class, 'k-pager-info')]")
